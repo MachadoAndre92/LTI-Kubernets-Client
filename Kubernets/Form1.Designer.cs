@@ -38,13 +38,17 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.tabList = new System.Windows.Forms.TabPage();
+            this.cb_namespaces = new MaterialSkin.Controls.MaterialComboBox();
+            this.radioBtn_PodsNamespace = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioBtn_AllPods = new MaterialSkin.Controls.MaterialRadioButton();
+            this.btn_pods = new MaterialSkin.Controls.MaterialButton();
+            this.btn_Namespaces = new MaterialSkin.Controls.MaterialButton();
             this.lbl_ListView = new MaterialSkin.Controls.MaterialLabel();
             this.listView1 = new MaterialSkin.Controls.MaterialListView();
             this.bnt_Nodes = new MaterialSkin.Controls.MaterialButton();
             this.tabEstatisticas = new System.Windows.Forms.TabPage();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.btn_Namespaces = new MaterialSkin.Controls.MaterialButton();
             this.tabControl.SuspendLayout();
             this.tabDashboard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -153,6 +157,10 @@
             // 
             // tabList
             // 
+            this.tabList.Controls.Add(this.cb_namespaces);
+            this.tabList.Controls.Add(this.radioBtn_PodsNamespace);
+            this.tabList.Controls.Add(this.radioBtn_AllPods);
+            this.tabList.Controls.Add(this.btn_pods);
             this.tabList.Controls.Add(this.btn_Namespaces);
             this.tabList.Controls.Add(this.lbl_ListView);
             this.tabList.Controls.Add(this.listView1);
@@ -165,6 +173,105 @@
             this.tabList.TabIndex = 1;
             this.tabList.Text = "Listar";
             this.tabList.UseVisualStyleBackColor = true;
+            // 
+            // cb_namespaces
+            // 
+            this.cb_namespaces.AutoResize = false;
+            this.cb_namespaces.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cb_namespaces.Depth = 0;
+            this.cb_namespaces.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cb_namespaces.DropDownHeight = 174;
+            this.cb_namespaces.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_namespaces.DropDownWidth = 121;
+            this.cb_namespaces.Enabled = false;
+            this.cb_namespaces.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cb_namespaces.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cb_namespaces.FormattingEnabled = true;
+            this.cb_namespaces.IntegralHeight = false;
+            this.cb_namespaces.ItemHeight = 43;
+            this.cb_namespaces.Location = new System.Drawing.Point(310, 236);
+            this.cb_namespaces.MaxDropDownItems = 4;
+            this.cb_namespaces.MouseState = MaterialSkin.MouseState.OUT;
+            this.cb_namespaces.Name = "cb_namespaces";
+            this.cb_namespaces.Size = new System.Drawing.Size(204, 49);
+            this.cb_namespaces.StartIndex = 0;
+            this.cb_namespaces.TabIndex = 7;
+            this.cb_namespaces.SelectedIndexChanged += new System.EventHandler(this.cb_namespaces_SelectedIndexChanged);
+            // 
+            // radioBtn_PodsNamespace
+            // 
+            this.radioBtn_PodsNamespace.AutoSize = true;
+            this.radioBtn_PodsNamespace.Depth = 0;
+            this.radioBtn_PodsNamespace.Location = new System.Drawing.Point(17, 340);
+            this.radioBtn_PodsNamespace.Margin = new System.Windows.Forms.Padding(0);
+            this.radioBtn_PodsNamespace.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioBtn_PodsNamespace.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioBtn_PodsNamespace.Name = "radioBtn_PodsNamespace";
+            this.radioBtn_PodsNamespace.Ripple = true;
+            this.radioBtn_PodsNamespace.Size = new System.Drawing.Size(230, 37);
+            this.radioBtn_PodsNamespace.TabIndex = 6;
+            this.radioBtn_PodsNamespace.TabStop = true;
+            this.radioBtn_PodsNamespace.Text = "Listar Pods por Namespace";
+            this.radioBtn_PodsNamespace.UseVisualStyleBackColor = true;
+            this.radioBtn_PodsNamespace.CheckedChanged += new System.EventHandler(this.radioBtn_PodsNamespace_CheckedChanged);
+            // 
+            // radioBtn_AllPods
+            // 
+            this.radioBtn_AllPods.AutoSize = true;
+            this.radioBtn_AllPods.Checked = true;
+            this.radioBtn_AllPods.Depth = 0;
+            this.radioBtn_AllPods.Location = new System.Drawing.Point(17, 303);
+            this.radioBtn_AllPods.Margin = new System.Windows.Forms.Padding(0);
+            this.radioBtn_AllPods.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioBtn_AllPods.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioBtn_AllPods.Name = "radioBtn_AllPods";
+            this.radioBtn_AllPods.Ripple = true;
+            this.radioBtn_AllPods.Size = new System.Drawing.Size(180, 37);
+            this.radioBtn_AllPods.TabIndex = 5;
+            this.radioBtn_AllPods.TabStop = true;
+            this.radioBtn_AllPods.Text = "Listar todos os Pods";
+            this.radioBtn_AllPods.UseVisualStyleBackColor = true;
+            this.radioBtn_AllPods.CheckedChanged += new System.EventHandler(this.radioBtn_AllPods_CheckedChanged);
+            // 
+            // btn_pods
+            // 
+            this.btn_pods.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_pods.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btn_pods.Depth = 0;
+            this.btn_pods.HighEmphasis = true;
+            this.btn_pods.Icon = null;
+            this.btn_pods.Location = new System.Drawing.Point(220, 236);
+            this.btn_pods.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_pods.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_pods.Name = "btn_pods";
+            this.btn_pods.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btn_pods.Size = new System.Drawing.Size(64, 36);
+            this.btn_pods.TabIndex = 4;
+            this.btn_pods.Text = "Pods";
+            this.btn_pods.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btn_pods.UseAccentColor = false;
+            this.btn_pods.UseVisualStyleBackColor = true;
+            this.btn_pods.Click += new System.EventHandler(this.btn_pods_Click);
+            // 
+            // btn_Namespaces
+            // 
+            this.btn_Namespaces.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_Namespaces.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btn_Namespaces.Depth = 0;
+            this.btn_Namespaces.HighEmphasis = true;
+            this.btn_Namespaces.Icon = null;
+            this.btn_Namespaces.Location = new System.Drawing.Point(94, 236);
+            this.btn_Namespaces.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_Namespaces.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_Namespaces.Name = "btn_Namespaces";
+            this.btn_Namespaces.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btn_Namespaces.Size = new System.Drawing.Size(118, 36);
+            this.btn_Namespaces.TabIndex = 3;
+            this.btn_Namespaces.Text = "Namespaces";
+            this.btn_Namespaces.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btn_Namespaces.UseAccentColor = false;
+            this.btn_Namespaces.UseVisualStyleBackColor = true;
+            this.btn_Namespaces.Click += new System.EventHandler(this.btn_Namespaces_Click);
             // 
             // lbl_ListView
             // 
@@ -209,7 +316,7 @@
             this.bnt_Nodes.MouseState = MaterialSkin.MouseState.HOVER;
             this.bnt_Nodes.Name = "bnt_Nodes";
             this.bnt_Nodes.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.bnt_Nodes.Size = new System.Drawing.Size(73, 36);
+            this.bnt_Nodes.Size = new System.Drawing.Size(69, 36);
             this.bnt_Nodes.TabIndex = 0;
             this.bnt_Nodes.Text = "Nodes";
             this.bnt_Nodes.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -257,26 +364,6 @@
             this.imageList1.Images.SetKeyName(2, "icons8-dashboard-64.png");
             this.imageList1.Images.SetKeyName(3, "icons8-docker-50.png");
             // 
-            // btn_Namespaces
-            // 
-            this.btn_Namespaces.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btn_Namespaces.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btn_Namespaces.Depth = 0;
-            this.btn_Namespaces.HighEmphasis = true;
-            this.btn_Namespaces.Icon = null;
-            this.btn_Namespaces.Location = new System.Drawing.Point(108, 236);
-            this.btn_Namespaces.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btn_Namespaces.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btn_Namespaces.Name = "btn_Namespaces";
-            this.btn_Namespaces.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btn_Namespaces.Size = new System.Drawing.Size(118, 36);
-            this.btn_Namespaces.TabIndex = 3;
-            this.btn_Namespaces.Text = "Namespaces";
-            this.btn_Namespaces.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btn_Namespaces.UseAccentColor = false;
-            this.btn_Namespaces.UseVisualStyleBackColor = true;
-            this.btn_Namespaces.Click += new System.EventHandler(this.btn_Namespaces_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -319,5 +406,9 @@
         private MaterialSkin.Controls.MaterialLabel lbl_ListView;
         private MaterialSkin.Controls.MaterialListView listView1;
         private MaterialSkin.Controls.MaterialButton btn_Namespaces;
+        private MaterialSkin.Controls.MaterialButton btn_pods;
+        private MaterialSkin.Controls.MaterialComboBox cb_namespaces;
+        private MaterialSkin.Controls.MaterialRadioButton radioBtn_PodsNamespace;
+        private MaterialSkin.Controls.MaterialRadioButton radioBtn_AllPods;
     }
 }
