@@ -38,6 +38,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.tabList = new System.Windows.Forms.TabPage();
+            this.btn_services = new MaterialSkin.Controls.MaterialButton();
+            this.btnDeployments = new MaterialSkin.Controls.MaterialButton();
             this.cb_namespaces = new MaterialSkin.Controls.MaterialComboBox();
             this.radioBtn_PodsNamespace = new MaterialSkin.Controls.MaterialRadioButton();
             this.radioBtn_AllPods = new MaterialSkin.Controls.MaterialRadioButton();
@@ -46,6 +48,14 @@
             this.lbl_ListView = new MaterialSkin.Controls.MaterialLabel();
             this.listView1 = new MaterialSkin.Controls.MaterialListView();
             this.bnt_Nodes = new MaterialSkin.Controls.MaterialButton();
+            this.TabCreate = new System.Windows.Forms.TabPage();
+            this.btnEliminar = new MaterialSkin.Controls.MaterialButton();
+            this.btnCriar = new MaterialSkin.Controls.MaterialButton();
+            this.radioCriar = new MaterialSkin.Controls.MaterialRadioButton();
+            this.radioEliminar = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialComboBox1 = new MaterialSkin.Controls.MaterialComboBox();
             this.tabEstatisticas = new System.Windows.Forms.TabPage();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -55,6 +65,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabList.SuspendLayout();
+            this.TabCreate.SuspendLayout();
             this.tabEstatisticas.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +73,7 @@
             // 
             this.tabControl.Controls.Add(this.tabDashboard);
             this.tabControl.Controls.Add(this.tabList);
+            this.tabControl.Controls.Add(this.TabCreate);
             this.tabControl.Controls.Add(this.tabEstatisticas);
             this.tabControl.Depth = 0;
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,6 +169,8 @@
             // 
             // tabList
             // 
+            this.tabList.Controls.Add(this.btn_services);
+            this.tabList.Controls.Add(this.btnDeployments);
             this.tabList.Controls.Add(this.cb_namespaces);
             this.tabList.Controls.Add(this.radioBtn_PodsNamespace);
             this.tabList.Controls.Add(this.radioBtn_AllPods);
@@ -165,7 +179,7 @@
             this.tabList.Controls.Add(this.lbl_ListView);
             this.tabList.Controls.Add(this.listView1);
             this.tabList.Controls.Add(this.bnt_Nodes);
-            this.tabList.ImageKey = "icons8-docker-50.png";
+            this.tabList.ImageKey = "icons8-list-50.png";
             this.tabList.Location = new System.Drawing.Point(4, 39);
             this.tabList.Name = "tabList";
             this.tabList.Padding = new System.Windows.Forms.Padding(3);
@@ -173,6 +187,46 @@
             this.tabList.TabIndex = 1;
             this.tabList.Text = "Listar";
             this.tabList.UseVisualStyleBackColor = true;
+            // 
+            // btn_services
+            // 
+            this.btn_services.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btn_services.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btn_services.Depth = 0;
+            this.btn_services.HighEmphasis = true;
+            this.btn_services.Icon = null;
+            this.btn_services.Location = new System.Drawing.Point(426, 236);
+            this.btn_services.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btn_services.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btn_services.Name = "btn_services";
+            this.btn_services.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btn_services.Size = new System.Drawing.Size(88, 36);
+            this.btn_services.TabIndex = 9;
+            this.btn_services.Text = "Services";
+            this.btn_services.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btn_services.UseAccentColor = false;
+            this.btn_services.UseVisualStyleBackColor = true;
+            this.btn_services.Click += new System.EventHandler(this.btn_services_Click);
+            // 
+            // btnDeployments
+            // 
+            this.btnDeployments.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnDeployments.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnDeployments.Depth = 0;
+            this.btnDeployments.HighEmphasis = true;
+            this.btnDeployments.Icon = null;
+            this.btnDeployments.Location = new System.Drawing.Point(292, 236);
+            this.btnDeployments.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDeployments.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnDeployments.Name = "btnDeployments";
+            this.btnDeployments.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnDeployments.Size = new System.Drawing.Size(126, 36);
+            this.btnDeployments.TabIndex = 8;
+            this.btnDeployments.Text = "Deployments";
+            this.btnDeployments.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnDeployments.UseAccentColor = false;
+            this.btnDeployments.UseVisualStyleBackColor = true;
+            this.btnDeployments.Click += new System.EventHandler(this.btnDeployments_Click);
             // 
             // cb_namespaces
             // 
@@ -189,7 +243,7 @@
             this.cb_namespaces.FormattingEnabled = true;
             this.cb_namespaces.IntegralHeight = false;
             this.cb_namespaces.ItemHeight = 43;
-            this.cb_namespaces.Location = new System.Drawing.Point(310, 236);
+            this.cb_namespaces.Location = new System.Drawing.Point(272, 303);
             this.cb_namespaces.MaxDropDownItems = 4;
             this.cb_namespaces.MouseState = MaterialSkin.MouseState.OUT;
             this.cb_namespaces.Name = "cb_namespaces";
@@ -324,6 +378,150 @@
             this.bnt_Nodes.UseVisualStyleBackColor = true;
             this.bnt_Nodes.Click += new System.EventHandler(this.bnt_Nodes_Click);
             // 
+            // TabCreate
+            // 
+            this.TabCreate.Controls.Add(this.btnEliminar);
+            this.TabCreate.Controls.Add(this.btnCriar);
+            this.TabCreate.Controls.Add(this.radioCriar);
+            this.TabCreate.Controls.Add(this.radioEliminar);
+            this.TabCreate.Controls.Add(this.materialLabel3);
+            this.TabCreate.Controls.Add(this.materialLabel2);
+            this.TabCreate.Controls.Add(this.materialComboBox1);
+            this.TabCreate.ImageKey = "icons8-docker-50.png";
+            this.TabCreate.Location = new System.Drawing.Point(4, 39);
+            this.TabCreate.Name = "TabCreate";
+            this.TabCreate.Size = new System.Drawing.Size(874, 475);
+            this.TabCreate.TabIndex = 3;
+            this.TabCreate.Text = "Criar";
+            this.TabCreate.UseVisualStyleBackColor = true;
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnEliminar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnEliminar.Depth = 0;
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.HighEmphasis = true;
+            this.btnEliminar.Icon = null;
+            this.btnEliminar.Location = new System.Drawing.Point(355, 381);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnEliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnEliminar.Size = new System.Drawing.Size(88, 36);
+            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnEliminar.UseAccentColor = false;
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // btnCriar
+            // 
+            this.btnCriar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCriar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCriar.Depth = 0;
+            this.btnCriar.Enabled = false;
+            this.btnCriar.HighEmphasis = true;
+            this.btnCriar.Icon = null;
+            this.btnCriar.Location = new System.Drawing.Point(283, 381);
+            this.btnCriar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCriar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCriar.Name = "btnCriar";
+            this.btnCriar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCriar.Size = new System.Drawing.Size(64, 36);
+            this.btnCriar.TabIndex = 7;
+            this.btnCriar.Text = "Criar";
+            this.btnCriar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCriar.UseAccentColor = false;
+            this.btnCriar.UseVisualStyleBackColor = true;
+            // 
+            // radioCriar
+            // 
+            this.radioCriar.AutoSize = true;
+            this.radioCriar.Depth = 0;
+            this.radioCriar.Location = new System.Drawing.Point(14, 64);
+            this.radioCriar.Margin = new System.Windows.Forms.Padding(0);
+            this.radioCriar.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioCriar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioCriar.Name = "radioCriar";
+            this.radioCriar.Ripple = true;
+            this.radioCriar.Size = new System.Drawing.Size(68, 37);
+            this.radioCriar.TabIndex = 6;
+            this.radioCriar.TabStop = true;
+            this.radioCriar.Text = "Criar";
+            this.radioCriar.UseVisualStyleBackColor = true;
+            this.radioCriar.CheckedChanged += new System.EventHandler(this.radioCriar_CheckedChanged);
+            // 
+            // radioEliminar
+            // 
+            this.radioEliminar.AutoSize = true;
+            this.radioEliminar.Depth = 0;
+            this.radioEliminar.Location = new System.Drawing.Point(14, 101);
+            this.radioEliminar.Margin = new System.Windows.Forms.Padding(0);
+            this.radioEliminar.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.radioEliminar.MouseState = MaterialSkin.MouseState.HOVER;
+            this.radioEliminar.Name = "radioEliminar";
+            this.radioEliminar.Ripple = true;
+            this.radioEliminar.Size = new System.Drawing.Size(93, 37);
+            this.radioEliminar.TabIndex = 5;
+            this.radioEliminar.TabStop = true;
+            this.radioEliminar.Text = "Eliminar";
+            this.radioEliminar.UseVisualStyleBackColor = true;
+            this.radioEliminar.CheckedChanged += new System.EventHandler(this.radioEliminar_CheckedChanged);
+            // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel3.Location = new System.Drawing.Point(12, 24);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(217, 29);
+            this.materialLabel3.TabIndex = 4;
+            this.materialLabel3.Text = "Escolha uma acção:";
+            // 
+            // materialLabel2
+            // 
+            this.materialLabel2.AutoSize = true;
+            this.materialLabel2.Depth = 0;
+            this.materialLabel2.Font = new System.Drawing.Font("Roboto", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel2.FontType = MaterialSkin.MaterialSkinManager.fontType.H5;
+            this.materialLabel2.Location = new System.Drawing.Point(12, 152);
+            this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel2.Name = "materialLabel2";
+            this.materialLabel2.Size = new System.Drawing.Size(218, 29);
+            this.materialLabel2.TabIndex = 1;
+            this.materialLabel2.Text = "Escolha uma opção:";
+            // 
+            // materialComboBox1
+            // 
+            this.materialComboBox1.AutoResize = false;
+            this.materialComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialComboBox1.Depth = 0;
+            this.materialComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.materialComboBox1.DropDownHeight = 174;
+            this.materialComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.materialComboBox1.DropDownWidth = 121;
+            this.materialComboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.materialComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialComboBox1.FormattingEnabled = true;
+            this.materialComboBox1.IntegralHeight = false;
+            this.materialComboBox1.ItemHeight = 43;
+            this.materialComboBox1.Items.AddRange(new object[] {
+            "Pod",
+            "Namespace",
+            "Deployment",
+            "Service"});
+            this.materialComboBox1.Location = new System.Drawing.Point(12, 188);
+            this.materialComboBox1.MaxDropDownItems = 4;
+            this.materialComboBox1.MouseState = MaterialSkin.MouseState.OUT;
+            this.materialComboBox1.Name = "materialComboBox1";
+            this.materialComboBox1.Size = new System.Drawing.Size(192, 49);
+            this.materialComboBox1.StartIndex = 0;
+            this.materialComboBox1.TabIndex = 0;
+            // 
             // tabEstatisticas
             // 
             this.tabEstatisticas.Controls.Add(this.materialButton2);
@@ -359,10 +557,10 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "icons8-home.gif");
-            this.imageList1.Images.SetKeyName(1, "icons8-home-32.png");
-            this.imageList1.Images.SetKeyName(2, "icons8-dashboard-64.png");
-            this.imageList1.Images.SetKeyName(3, "icons8-docker-50.png");
+            this.imageList1.Images.SetKeyName(0, "icons8-home-32.png");
+            this.imageList1.Images.SetKeyName(1, "icons8-dashboard-64.png");
+            this.imageList1.Images.SetKeyName(2, "icons8-docker-50.png");
+            this.imageList1.Images.SetKeyName(3, "icons8-list-50.png");
             // 
             // Form1
             // 
@@ -384,6 +582,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabList.ResumeLayout(false);
             this.tabList.PerformLayout();
+            this.TabCreate.ResumeLayout(false);
+            this.TabCreate.PerformLayout();
             this.tabEstatisticas.ResumeLayout(false);
             this.tabEstatisticas.PerformLayout();
             this.ResumeLayout(false);
@@ -410,5 +610,15 @@
         private MaterialSkin.Controls.MaterialComboBox cb_namespaces;
         private MaterialSkin.Controls.MaterialRadioButton radioBtn_PodsNamespace;
         private MaterialSkin.Controls.MaterialRadioButton radioBtn_AllPods;
+        private MaterialSkin.Controls.MaterialButton btnDeployments;
+        private MaterialSkin.Controls.MaterialButton btn_services;
+        private TabPage TabCreate;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
+        private MaterialSkin.Controls.MaterialLabel materialLabel2;
+        private MaterialSkin.Controls.MaterialComboBox materialComboBox1;
+        private MaterialSkin.Controls.MaterialRadioButton radioCriar;
+        private MaterialSkin.Controls.MaterialRadioButton radioEliminar;
+        private MaterialSkin.Controls.MaterialButton btnEliminar;
+        private MaterialSkin.Controls.MaterialButton btnCriar;
     }
 }

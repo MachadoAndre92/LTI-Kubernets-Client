@@ -307,8 +307,18 @@ namespace Kubernets
 
         private void getPodsNamespace(string namespaceName)
         {
+            V1PodList pods = new V1PodList();  
+            try
+            {
+                pods = cliente.ListNamespacedPod(namespaceName);  //filtrar por namespace
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
 
-            var pods = cliente.ListNamespacedPod(namespaceName);  //filtrar por namespace
+            lbl_ListView.Text = "Pods by Namespace";
 
             listView1.Clear();
        
@@ -349,6 +359,107 @@ namespace Kubernets
         private void cb_namespaces_SelectedIndexChanged(object sender, EventArgs e)
         {
             getPodsNamespace(cb_namespaces.SelectedItem.ToString());
+        }
+
+        private void btnDeployments_Click(object sender, EventArgs e)
+        {
+            V1DeploymentList deployments = new V1DeploymentList();
+
+            try
+            {
+                deployments = cliente.ListDeploymentForAllNamespaces();   //deployments de todos os namespaces
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            lbl_ListView.Text = "Deployments";
+
+            listView1.Clear();
+
+            listView1.View = View.Details;
+            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Disponivel:", -2, HorizontalAlignment.Left);
+
+            foreach (var deploy in deployments.Items)
+            {
+
+                ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name.ToString());
+                item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
+                item2Add.SubItems.Add(converterdeploy(deploy.Spec.Replicas.ToString(), deploy.Status.AvailableReplicas.ToString()));
+                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+                item2Add.SubItems.Add(deploy.Status.AvailableReplicas.ToString());
+
+                listView1.Items.Add(item2Add);
+
+            }
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+        public string converterdeploy(string v1, string v2)
+        {
+
+            string deploy = v1 + "/" + v2;
+            return deploy;
+        }
+
+        private void btn_services_Click(object sender, EventArgs e)
+        {
+
+            V1ServiceList services = new V1ServiceList();
+            try
+            {
+                services = cliente.ListServiceForAllNamespaces();
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            lbl_ListView.Text = "Services";
+
+            listView1.Clear();
+
+            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);            
+            listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Tipo:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Cluster-IP:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Portos/Protocolos:", -2, HorizontalAlignment.Left);
+
+            foreach (var service in services.Items)
+            {
+
+                ListViewItem item2Add = new ListViewItem(service.Metadata.Name.ToString());
+                item2Add.SubItems.Add(service.Metadata.Namespace().ToString());
+                item2Add.SubItems.Add(service.Spec.Type.ToString());
+                item2Add.SubItems.Add(service.Spec.ClusterIP.ToString());
+                item2Add.SubItems.Add(converterdeploy(service.Spec.Ports[0].Port.ToString(),service.Spec.Ports[0].Protocol));
+
+                listView1.Items.Add(item2Add);
+
+            }
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void radioCriar_CheckedChanged(object sender, EventArgs e)
+        {
+            btnCriar.Enabled = radioCriar.Checked;
+            btnEliminar.Enabled = radioEliminar.Checked;
+        }
+
+        private void radioEliminar_CheckedChanged(object sender, EventArgs e)
+        {
+            btnEliminar.Enabled = radioEliminar.Checked;
+            btnCriar.Enabled=radioCriar.Checked;
         }
     }
 }
