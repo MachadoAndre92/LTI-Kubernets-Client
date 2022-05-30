@@ -460,6 +460,216 @@ namespace Kubernets
         {
             btnEliminar.Enabled = radioEliminar.Checked;
             btnCriar.Enabled=radioCriar.Checked;
+            
+        }
+
+        private void cbOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNome.Enabled = false;
+            txtPorto.Enabled=false;
+
+            switch (cbOption.SelectedIndex)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    if (radioEliminar.Checked)
+                    {
+                        cbOptionNamespace.Enabled = false;
+                        getCbOptionNamespace();
+                    }
+                    else
+                    {
+                        txtNome.Enabled = true;
+                    }
+                    break;
+                case 3:
+                    if (radioEliminar.Checked)
+                    {
+                        cbServices.Enabled = true;
+                        cbOptionNamespace.Enabled = true;
+                        getCbOptionNamespace();
+                        
+
+                    }
+                    else
+                    {
+                        txtNome.Enabled = true;
+                        txtPorto.Enabled = true;
+                        cbProtocolo.Enabled = true;
+                        cbOptionNamespace.Enabled = true;
+                        getCbOptionNamespace();
+                    }
+                    break;
+            }
+
+
+
+        }
+
+        private void getCbServices()
+        {
+            V1ServiceList services = new V1ServiceList();
+            try
+            {
+                services = cliente.ListNamespacedService(cbOptionNamespace.Text);
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            foreach (var service in services.Items)
+            {
+
+                cbServices.Items.Add(service.Metadata.Name);
+
+            }
+            cbServices.SelectedIndex = 0;
+
+
+        }
+
+        private void getCbOptionNamespace()
+        {
+            V1NamespaceList namespaces = new V1NamespaceList();
+            try
+            {
+                namespaces = cliente.ListNamespace();
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
+
+            foreach (var namespace1 in namespaces.Items)
+            {
+
+                cbOptionNamespace.Items.Add(namespace1.Metadata.Name);
+
+            }
+            cbOptionNamespace.SelectedIndex = 0;
+            getCbServices();
+        }
+
+        private void createNamespace()
+        {
+            /*
+            var myWebClient = new WebClient();
+            string url = "http://" + textBoxIP.Text + "/api/v1/namespaces";
+            var body = "{\"apiVersion\": \"v1\",\"kind\": \"Namespace\",\"metadata\": {\"name\": \"" + nspace + "\"}}";
+            myWebClient.UploadString("http://" + textBoxIP.Text + "/compute/v2.1/servers", body);
+
+            */
+            string nome = txtNome.Text;
+
+            var ns = new V1Namespace { Metadata = new V1ObjectMeta { Labels = new Dictionary<string, string>() { { "app", nome } }, Name = nome } };
+
+            var result = cliente.CreateNamespace(ns);
+            MessageBox.Show(result.ToString());
+
+        }
+
+        private void btnCriar_Click(object sender, EventArgs e)
+        {
+            switch (cbOption.SelectedIndex)
+            {
+                case 1:
+                    createNamespace();
+                    break;
+
+                case 3:
+                    createService();
+                    
+                    break;
+            }
+            
+        }
+
+        private void createService()
+        {
+            
+
+            string nome = txtNome.Text;
+            string protocol = cbProtocolo.Text; 
+            int porto = Convert.ToInt32(txtPorto.Text);
+
+            var createService = new V1Service
+            {
+                Metadata = new V1ObjectMeta { Name = nome },
+                Spec = new V1ServiceSpec
+                {
+                    Type = "NodePort",
+                    Selector = new Dictionary<string, string>() { { "app", nome } },
+                    Ports = new List<V1ServicePort>() { new V1ServicePort { Protocol = protocol, Port = porto } }
+                }
+
+            };
+
+            try
+            {
+                cliente.CreateNamespacedService(createService, cbOptionNamespace.Text);
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+            MessageBox.Show("Service criado com sucesso.");
+        }
+
+        private void delete_namespace()
+        {
+            string nome = cbOptionNamespace.Text;
+
+            Task<V1Status> status;
+            try
+            {
+                status = cliente.DeleteNamespaceAsync(nome, new V1DeleteOptions());
+
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+
+            MessageBox.Show("Namespace " + nome + " eliminado.");
+
+            
+
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+            switch (cbOption.SelectedIndex)
+            {
+                case 1:
+                    delete_namespace();
+                    break;
+                case 3:
+                    delete_service();
+                    break;
+            }
+
+            
+        }
+
+        private void delete_service()
+        {
+            string nome = cbServices.Text;
+            try
+            {
+                cliente.DeleteNamespacedServiceAsync(nome, cbOptionNamespace.Text, new V1DeleteOptions());
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+            }
+            
+            
+
+
         }
     }
 }
