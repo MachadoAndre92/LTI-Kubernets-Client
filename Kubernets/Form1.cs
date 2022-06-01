@@ -67,8 +67,8 @@ namespace Kubernets
                         MessageBox.Show("Ficheiro lido com sucesso!");
 
                         getNodes();
-                        
-
+                        fillCbEstatisticasNamespaces();
+                        getEstatisticas();
 
                         return cliente;
                     }
@@ -224,9 +224,10 @@ namespace Kubernets
             listView1.Columns.Add("Estado:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Containers:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Pod IP:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Imagem:", -2, HorizontalAlignment.Left);
 
 
-            
+
             foreach (var pod in pods.Items)
             {
 
@@ -236,6 +237,7 @@ namespace Kubernets
                 item2Add.SubItems.Add(pod.Spec.Containers.Count.ToString());
                 //item2Add.SubItems.Add(pod.Metadata.CreationTimestamp.ToString());
                 item2Add.SubItems.Add(pod.Status.PodIP);
+                item2Add.SubItems.Add(pod.Spec.Containers[0].Image);
                 //item2Add.SubItems.Add(pod.Metadata.Uid.ToString());
 
                 listView1.Items.Add(item2Add);
@@ -308,6 +310,7 @@ namespace Kubernets
             listView1.Columns.Add("Estado:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Nº de Containers:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Pod IP:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Imagem:", -2, HorizontalAlignment.Left);
 
             foreach (var pod in pods.Items)
             {
@@ -315,9 +318,9 @@ namespace Kubernets
                 ListViewItem item2Add = new ListViewItem(pod.Metadata.Name);
                 item2Add.SubItems.Add(pod.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(pod.Status.Phase);
-                item2Add.SubItems.Add(pod.Spec.Containers.Count.ToString());
-                //item2Add.SubItems.Add(pod.Spec.Containers);
+                item2Add.SubItems.Add(pod.Spec.Containers.Count.ToString());                
                 item2Add.SubItems.Add(pod.Status.PodIP);
+                item2Add.SubItems.Add(pod.Spec.Containers[0].Image);
                 //item2Add.SubItems.Add(pod.Metadata.Uid.ToString());
 
                 listView1.Items.Add(item2Add);
@@ -370,7 +373,7 @@ namespace Kubernets
                 return;
             }
 
-            lbl_ListView.Text = "Deployments";
+            lbl_ListView.Text = "Deployments Por Namespace";
 
             listView1.Clear();
 
@@ -378,7 +381,8 @@ namespace Kubernets
             listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+            //listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Imagem:", -2, HorizontalAlignment.Left);
 
 
             foreach (var deploy in deployments.Items)
@@ -387,7 +391,8 @@ namespace Kubernets
                 ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name);
                 item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(deploy.Status.Replicas.ToString());
-                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+                //item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+                item2Add.SubItems.Add(deploy.Spec.Template.Spec.Containers[0].Image);
 
                 listView1.Items.Add(item2Add);
 
@@ -419,7 +424,8 @@ namespace Kubernets
             listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+            //listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Imagem:", -2, HorizontalAlignment.Left);
 
 
             foreach (var deploy in deployments.Items)
@@ -428,7 +434,9 @@ namespace Kubernets
                 ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name);
                 item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(deploy.Status.Replicas.ToString());
-                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+               //item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+                item2Add.SubItems.Add(deploy.Spec.Template.Spec.Containers[0].Image);
+                //item2Add.SubItems.Add(deploy.Metadata.);
 
                 listView1.Items.Add(item2Add);
 
@@ -473,7 +481,7 @@ namespace Kubernets
                 return;
             }
 
-            lbl_ListView.Text = "Services";
+            lbl_ListView.Text = "Services by Namespace";
 
             listView1.Clear();
 
@@ -1026,7 +1034,7 @@ namespace Kubernets
             switch (cbOption.SelectedIndex)
             {
                 case 0:
-                    delete_pode();
+                    delete_pod();
                     break;
                 case 1:
                     delete_namespace();
@@ -1057,7 +1065,7 @@ namespace Kubernets
             
         }
 
-        private void delete_pode()
+        private void delete_pod()
         {
             string nome = cbOptionPod.Text;
             try
@@ -1092,6 +1100,116 @@ namespace Kubernets
             getCbOtionPod();
             getServices();
             getCbDeployments();
+        }
+
+        
+
+        private void tabEstatisticas_Click(object sender, EventArgs e)
+        {
+            //fillCbEstatisticasNamespaces();
+
+            //getEstatisticas();
+        }
+
+        private void fillCbEstatisticasNamespaces()
+        {
+            cbEstatisticaNamespace.Items.Clear();
+
+            V1NamespaceList namespaces = new V1NamespaceList();
+            try
+            {
+                namespaces = cliente.ListNamespace();
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
+
+
+
+            foreach (var namespace1 in namespaces.Items)
+            {
+
+                cbEstatisticaNamespace.Items.Add(namespace1.Metadata.Name);
+
+            }
+            cbEstatisticaNamespace.SelectedIndex = 0;
+        }
+
+        private void getEstatisticas()
+        {
+            
+
+            V1DeploymentList deployments = new V1DeploymentList();
+            V1PodList pods = new V1PodList();
+            V1ServiceList services = new V1ServiceList();
+            V1NamespaceList namespaces = new V1NamespaceList();
+            V1NodeList nodes = new V1NodeList();
+            try
+            {
+                nodes = cliente.ListNode();
+                namespaces = cliente.ListNamespace();
+                pods = cliente.ListPodForAllNamespaces();  //filtrar por namespace
+                services = cliente.ListServiceForAllNamespaces();
+                deployments = cliente.ListDeploymentForAllNamespaces();
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
+
+            lblTotalNamespace.Text = "Total de Namespaces: " + namespaces.Items.Count;
+            lblTotalNodes.Text = "Total de Nodes: " + nodes.Items.Count;
+            lblTotalDeployments.Text = "Total de Deployments: " + deployments.Items.Count;
+            lblTotalPods.Text = "Total de Pods: " + pods.Items.Count;
+            lblTotalServices.Text = "Total de Services: " + services.Items.Count;
+
+            
+        }
+
+        private void getEstatisticasNamespace(string nameSpace)
+        {
+            
+
+            V1DeploymentList deployments = new V1DeploymentList();
+            V1PodList pods = new V1PodList();         
+            V1ServiceList services = new V1ServiceList();
+            try
+            {
+                    pods = cliente.ListNamespacedPod(nameSpace);  //filtrar por namespace
+                    services = cliente.ListNamespacedService(nameSpace);
+                    deployments = cliente.ListNamespacedDeployment(nameSpace);
+                }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+
+            lblTotalDeployments.Text = "Total de Deployments: " + deployments.Items.Count;
+            lblTotalPods.Text = "Total de Pods: " + pods.Items.Count;
+            lblTotalServices.Text = "Total de Services: " + services.Items.Count;
+
+        }
+
+        private void radioEstatisticaGeral_CheckedChanged(object sender, EventArgs e)
+        {
+            cbEstatisticaNamespace.Enabled = false;
+            getEstatisticas();
+        }
+
+        private void RadioEstatisticaNamespace_CheckedChanged(object sender, EventArgs e)
+        {
+            fillCbEstatisticasNamespaces();
+            cbEstatisticaNamespace.Enabled = true;
+        }
+
+        private void cbEstatisticaNamespace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getEstatisticasNamespace(cbEstatisticaNamespace.Text);
         }
     }
 }
