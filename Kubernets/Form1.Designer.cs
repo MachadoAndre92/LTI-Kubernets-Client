@@ -430,7 +430,7 @@
             this.materialLabel9.AutoSize = true;
             this.materialLabel9.Depth = 0;
             this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel9.Location = new System.Drawing.Point(578, 251);
+            this.materialLabel9.Location = new System.Drawing.Point(512, 251);
             this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel9.Name = "materialLabel9";
             this.materialLabel9.Size = new System.Drawing.Size(94, 19);
@@ -452,7 +452,7 @@
             this.cbDeployments.FormattingEnabled = true;
             this.cbDeployments.IntegralHeight = false;
             this.cbDeployments.ItemHeight = 43;
-            this.cbDeployments.Location = new System.Drawing.Point(578, 273);
+            this.cbDeployments.Location = new System.Drawing.Point(512, 273);
             this.cbDeployments.MaxDropDownItems = 4;
             this.cbDeployments.MouseState = MaterialSkin.MouseState.OUT;
             this.cbDeployments.Name = "cbDeployments";
@@ -469,12 +469,12 @@
             this.txtNumeroReplicas.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNumeroReplicas.Hint = "Nº de Replicas";
             this.txtNumeroReplicas.LeadingIcon = null;
-            this.txtNumeroReplicas.Location = new System.Drawing.Point(730, 14);
+            this.txtNumeroReplicas.Location = new System.Drawing.Point(664, 14);
             this.txtNumeroReplicas.MaxLength = 50;
             this.txtNumeroReplicas.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNumeroReplicas.Multiline = false;
             this.txtNumeroReplicas.Name = "txtNumeroReplicas";
-            this.txtNumeroReplicas.Size = new System.Drawing.Size(100, 50);
+            this.txtNumeroReplicas.Size = new System.Drawing.Size(133, 50);
             this.txtNumeroReplicas.TabIndex = 21;
             this.txtNumeroReplicas.Text = "";
             this.txtNumeroReplicas.TrailingIcon = null;
@@ -484,7 +484,7 @@
             this.materialLabel8.AutoSize = true;
             this.materialLabel8.Depth = 0;
             this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel8.Location = new System.Drawing.Point(578, 166);
+            this.materialLabel8.Location = new System.Drawing.Point(512, 166);
             this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel8.Name = "materialLabel8";
             this.materialLabel8.Size = new System.Drawing.Size(46, 19);
@@ -496,7 +496,7 @@
             this.materialLabel7.AutoSize = true;
             this.materialLabel7.Depth = 0;
             this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel7.Location = new System.Drawing.Point(578, 85);
+            this.materialLabel7.Location = new System.Drawing.Point(512, 85);
             this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel7.Name = "materialLabel7";
             this.materialLabel7.Size = new System.Drawing.Size(69, 19);
@@ -508,7 +508,7 @@
             this.materialLabel6.AutoSize = true;
             this.materialLabel6.Depth = 0;
             this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel6.Location = new System.Drawing.Point(322, 251);
+            this.materialLabel6.Location = new System.Drawing.Point(256, 251);
             this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel6.Name = "materialLabel6";
             this.materialLabel6.Size = new System.Drawing.Size(37, 19);
@@ -520,7 +520,7 @@
             this.materialLabel5.AutoSize = true;
             this.materialLabel5.Depth = 0;
             this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel5.Location = new System.Drawing.Point(322, 166);
+            this.materialLabel5.Location = new System.Drawing.Point(256, 166);
             this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel5.Name = "materialLabel5";
             this.materialLabel5.Size = new System.Drawing.Size(60, 19);
@@ -532,7 +532,7 @@
             this.materialLabel4.AutoSize = true;
             this.materialLabel4.Depth = 0;
             this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel4.Location = new System.Drawing.Point(322, 85);
+            this.materialLabel4.Location = new System.Drawing.Point(256, 85);
             this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel4.Name = "materialLabel4";
             this.materialLabel4.Size = new System.Drawing.Size(93, 19);
@@ -554,7 +554,7 @@
             this.cbOptionPod.FormattingEnabled = true;
             this.cbOptionPod.IntegralHeight = false;
             this.cbOptionPod.ItemHeight = 43;
-            this.cbOptionPod.Location = new System.Drawing.Point(322, 273);
+            this.cbOptionPod.Location = new System.Drawing.Point(256, 273);
             this.cbOptionPod.MaxDropDownItems = 4;
             this.cbOptionPod.MouseState = MaterialSkin.MouseState.OUT;
             this.cbOptionPod.Name = "cbOptionPod";
@@ -577,7 +577,7 @@
             this.cbNodesOption.FormattingEnabled = true;
             this.cbNodesOption.IntegralHeight = false;
             this.cbNodesOption.ItemHeight = 43;
-            this.cbNodesOption.Location = new System.Drawing.Point(578, 188);
+            this.cbNodesOption.Location = new System.Drawing.Point(512, 188);
             this.cbNodesOption.MaxDropDownItems = 4;
             this.cbNodesOption.MouseState = MaterialSkin.MouseState.OUT;
             this.cbNodesOption.Name = "cbNodesOption";
@@ -600,7 +600,7 @@
             this.cbServices.FormattingEnabled = true;
             this.cbServices.IntegralHeight = false;
             this.cbServices.ItemHeight = 43;
-            this.cbServices.Location = new System.Drawing.Point(322, 188);
+            this.cbServices.Location = new System.Drawing.Point(256, 188);
             this.cbServices.MaxDropDownItems = 4;
             this.cbServices.MouseState = MaterialSkin.MouseState.OUT;
             this.cbServices.Name = "cbServices";
@@ -626,7 +626,7 @@
             this.cbProtocolo.Items.AddRange(new object[] {
             "TCP",
             "UDP"});
-            this.cbProtocolo.Location = new System.Drawing.Point(578, 107);
+            this.cbProtocolo.Location = new System.Drawing.Point(512, 107);
             this.cbProtocolo.MaxDropDownItems = 4;
             this.cbProtocolo.MouseState = MaterialSkin.MouseState.OUT;
             this.cbProtocolo.Name = "cbProtocolo";
@@ -643,7 +643,7 @@
             this.txtPorto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPorto.Hint = "Porto";
             this.txtPorto.LeadingIcon = null;
-            this.txtPorto.Location = new System.Drawing.Point(578, 14);
+            this.txtPorto.Location = new System.Drawing.Point(512, 14);
             this.txtPorto.MaxLength = 50;
             this.txtPorto.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPorto.Multiline = false;
@@ -668,7 +668,7 @@
             this.cbOptionNamespace.FormattingEnabled = true;
             this.cbOptionNamespace.IntegralHeight = false;
             this.cbOptionNamespace.ItemHeight = 43;
-            this.cbOptionNamespace.Location = new System.Drawing.Point(322, 107);
+            this.cbOptionNamespace.Location = new System.Drawing.Point(256, 107);
             this.cbOptionNamespace.MaxDropDownItems = 4;
             this.cbOptionNamespace.MouseState = MaterialSkin.MouseState.OUT;
             this.cbOptionNamespace.Name = "cbOptionNamespace";
@@ -686,7 +686,7 @@
             this.txtNome.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNome.Hint = "Nome";
             this.txtNome.LeadingIcon = null;
-            this.txtNome.Location = new System.Drawing.Point(322, 14);
+            this.txtNome.Location = new System.Drawing.Point(256, 14);
             this.txtNome.MaxLength = 50;
             this.txtNome.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNome.Multiline = false;

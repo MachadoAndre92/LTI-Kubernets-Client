@@ -242,6 +242,9 @@ namespace Kubernets
 
         public void fillCbNamespaces()
         {
+
+            cb_namespaces.Items.Clear();
+
             V1NamespaceList namespaces = new V1NamespaceList();
             try
             {
@@ -453,6 +456,7 @@ namespace Kubernets
                         cbOptionPod.Enabled = true;
                         getCbOptionNamespace();
                         getCbOtionPod();
+                        txtNumeroReplicas.Enabled = false;
                     }
                     else
                     {
@@ -465,6 +469,7 @@ namespace Kubernets
                         cbOptionPod.Enabled = false;
                         getCbOptionNamespace();
                         getCbNodeOption();
+                        txtNumeroReplicas.Enabled = false;
                     }
                     break;
 
@@ -480,6 +485,8 @@ namespace Kubernets
                         txtPorto.Enabled = false;
                         cbServices.Enabled = false;
                         cbProtocolo.Enabled = false;
+                        cbOptionPod.Enabled = false;
+                        txtNumeroReplicas.Enabled = false;
                     }
                     else
                     {
@@ -490,6 +497,8 @@ namespace Kubernets
                         txtPorto.Enabled = false;
                         cbServices.Enabled = false;
                         cbProtocolo.Enabled = false;
+                        cbOptionPod.Enabled = false;
+                        txtNumeroReplicas.Enabled = false;
                     }
                     break;
                 //Deployments
@@ -498,8 +507,11 @@ namespace Kubernets
                     {
                         cbDeployments.Enabled = true;
                         cbOptionNamespace.Enabled = true;
+                        cbOptionPod.Enabled = false;
                         getCbOptionNamespace();
                         getCbDeployments();
+
+                        txtNumeroReplicas.Enabled = false;
                     }
                     else
                     {
@@ -507,6 +519,7 @@ namespace Kubernets
                         txtPorto.Enabled = true;
                         txtNumeroReplicas.Enabled = true;
                         cbOptionNamespace.Enabled = true;
+                        cbOptionPod.Enabled = false;
                         getCbOptionNamespace();
                         
                     }
@@ -523,6 +536,9 @@ namespace Kubernets
                         cbNodesOption.Enabled = false;
                         txtPorto.Enabled = false;                        
                         cbProtocolo.Enabled = false;
+                        cbOptionPod.Enabled = false;
+
+                        txtNumeroReplicas.Enabled = false;
                         getCbServices();
 
                     }
@@ -532,13 +548,15 @@ namespace Kubernets
                         txtPorto.Enabled = true;
                         cbProtocolo.Enabled = true;
                         cbOptionNamespace.Enabled = true;
+                        cbOptionPod.Enabled = false;
                         getCbOptionNamespace();
 
                                              
                         cbNodesOption.Enabled = false;                        
                         cbServices.Enabled = false;
-                        
-                        
+                        txtNumeroReplicas.Enabled = false;
+
+
                     }
                     break;
             }
@@ -908,7 +926,7 @@ namespace Kubernets
 
             try
             {
-                cliente.DeleteNamespacedServiceAsync(nome, cbOptionNamespace.Text, new V1DeleteOptions());
+                cliente.DeleteNamespacedDeploymentAsync(nome, cbOptionNamespace.Text, new V1DeleteOptions());
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message.ToString());
