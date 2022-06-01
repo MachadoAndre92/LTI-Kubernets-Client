@@ -49,6 +49,9 @@
             this.listView1 = new MaterialSkin.Controls.MaterialListView();
             this.bnt_Nodes = new MaterialSkin.Controls.MaterialButton();
             this.TabCreate = new System.Windows.Forms.TabPage();
+            this.cbOptionPod = new MaterialSkin.Controls.MaterialComboBox();
+            this.cbNodesOption = new MaterialSkin.Controls.MaterialComboBox();
+            this.cbServices = new MaterialSkin.Controls.MaterialComboBox();
             this.cbProtocolo = new MaterialSkin.Controls.MaterialComboBox();
             this.txtPorto = new MaterialSkin.Controls.MaterialTextBox();
             this.cbOptionNamespace = new MaterialSkin.Controls.MaterialComboBox();
@@ -63,7 +66,6 @@
             this.tabEstatisticas = new System.Windows.Forms.TabPage();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.cbServices = new MaterialSkin.Controls.MaterialComboBox();
             this.tabControl.SuspendLayout();
             this.tabDashboard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -385,6 +387,8 @@
             // 
             // TabCreate
             // 
+            this.TabCreate.Controls.Add(this.cbOptionPod);
+            this.TabCreate.Controls.Add(this.cbNodesOption);
             this.TabCreate.Controls.Add(this.cbServices);
             this.TabCreate.Controls.Add(this.cbProtocolo);
             this.TabCreate.Controls.Add(this.txtPorto);
@@ -405,6 +409,75 @@
             this.TabCreate.Text = "Criar";
             this.TabCreate.UseVisualStyleBackColor = true;
             // 
+            // cbOptionPod
+            // 
+            this.cbOptionPod.AutoResize = false;
+            this.cbOptionPod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbOptionPod.Depth = 0;
+            this.cbOptionPod.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbOptionPod.DropDownHeight = 174;
+            this.cbOptionPod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbOptionPod.DropDownWidth = 121;
+            this.cbOptionPod.Enabled = false;
+            this.cbOptionPod.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbOptionPod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbOptionPod.FormattingEnabled = true;
+            this.cbOptionPod.IntegralHeight = false;
+            this.cbOptionPod.ItemHeight = 43;
+            this.cbOptionPod.Location = new System.Drawing.Point(322, 189);
+            this.cbOptionPod.MaxDropDownItems = 4;
+            this.cbOptionPod.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbOptionPod.Name = "cbOptionPod";
+            this.cbOptionPod.Size = new System.Drawing.Size(198, 49);
+            this.cbOptionPod.StartIndex = 0;
+            this.cbOptionPod.TabIndex = 15;
+            // 
+            // cbNodesOption
+            // 
+            this.cbNodesOption.AutoResize = false;
+            this.cbNodesOption.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbNodesOption.Depth = 0;
+            this.cbNodesOption.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbNodesOption.DropDownHeight = 174;
+            this.cbNodesOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbNodesOption.DropDownWidth = 121;
+            this.cbNodesOption.Enabled = false;
+            this.cbNodesOption.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbNodesOption.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbNodesOption.FormattingEnabled = true;
+            this.cbNodesOption.IntegralHeight = false;
+            this.cbNodesOption.ItemHeight = 43;
+            this.cbNodesOption.Location = new System.Drawing.Point(578, 133);
+            this.cbNodesOption.MaxDropDownItems = 4;
+            this.cbNodesOption.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbNodesOption.Name = "cbNodesOption";
+            this.cbNodesOption.Size = new System.Drawing.Size(196, 49);
+            this.cbNodesOption.StartIndex = 0;
+            this.cbNodesOption.TabIndex = 14;
+            // 
+            // cbServices
+            // 
+            this.cbServices.AutoResize = false;
+            this.cbServices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbServices.Depth = 0;
+            this.cbServices.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbServices.DropDownHeight = 174;
+            this.cbServices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbServices.DropDownWidth = 121;
+            this.cbServices.Enabled = false;
+            this.cbServices.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbServices.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbServices.FormattingEnabled = true;
+            this.cbServices.IntegralHeight = false;
+            this.cbServices.ItemHeight = 43;
+            this.cbServices.Location = new System.Drawing.Point(322, 132);
+            this.cbServices.MaxDropDownItems = 4;
+            this.cbServices.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbServices.Name = "cbServices";
+            this.cbServices.Size = new System.Drawing.Size(198, 49);
+            this.cbServices.StartIndex = 0;
+            this.cbServices.TabIndex = 13;
+            // 
             // cbProtocolo
             // 
             this.cbProtocolo.AutoResize = false;
@@ -423,7 +496,7 @@
             this.cbProtocolo.Items.AddRange(new object[] {
             "TCP",
             "UDP"});
-            this.cbProtocolo.Location = new System.Drawing.Point(407, 189);
+            this.cbProtocolo.Location = new System.Drawing.Point(578, 70);
             this.cbProtocolo.MaxDropDownItems = 4;
             this.cbProtocolo.MouseState = MaterialSkin.MouseState.OUT;
             this.cbProtocolo.Name = "cbProtocolo";
@@ -440,7 +513,7 @@
             this.txtPorto.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtPorto.Hint = "Porto";
             this.txtPorto.LeadingIcon = null;
-            this.txtPorto.Location = new System.Drawing.Point(407, 135);
+            this.txtPorto.Location = new System.Drawing.Point(578, 14);
             this.txtPorto.MaxLength = 50;
             this.txtPorto.MouseState = MaterialSkin.MouseState.OUT;
             this.txtPorto.Multiline = false;
@@ -465,13 +538,14 @@
             this.cbOptionNamespace.FormattingEnabled = true;
             this.cbOptionNamespace.IntegralHeight = false;
             this.cbOptionNamespace.ItemHeight = 43;
-            this.cbOptionNamespace.Location = new System.Drawing.Point(407, 80);
+            this.cbOptionNamespace.Location = new System.Drawing.Point(322, 70);
             this.cbOptionNamespace.MaxDropDownItems = 4;
             this.cbOptionNamespace.MouseState = MaterialSkin.MouseState.OUT;
             this.cbOptionNamespace.Name = "cbOptionNamespace";
             this.cbOptionNamespace.Size = new System.Drawing.Size(239, 49);
             this.cbOptionNamespace.StartIndex = 0;
             this.cbOptionNamespace.TabIndex = 10;
+            this.cbOptionNamespace.SelectedIndexChanged += new System.EventHandler(this.cbOptionNamespace_SelectedIndexChanged);
             // 
             // txtNome
             // 
@@ -482,7 +556,7 @@
             this.txtNome.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtNome.Hint = "Nome";
             this.txtNome.LeadingIcon = null;
-            this.txtNome.Location = new System.Drawing.Point(407, 24);
+            this.txtNome.Location = new System.Drawing.Point(322, 14);
             this.txtNome.MaxLength = 50;
             this.txtNome.MouseState = MaterialSkin.MouseState.OUT;
             this.txtNome.Multiline = false;
@@ -662,29 +736,6 @@
             this.imageList1.Images.SetKeyName(2, "icons8-docker-50.png");
             this.imageList1.Images.SetKeyName(3, "icons8-list-50.png");
             // 
-            // cbServices
-            // 
-            this.cbServices.AutoResize = false;
-            this.cbServices.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.cbServices.Depth = 0;
-            this.cbServices.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.cbServices.DropDownHeight = 174;
-            this.cbServices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbServices.DropDownWidth = 121;
-            this.cbServices.Enabled = false;
-            this.cbServices.Font = new System.Drawing.Font("Roboto Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
-            this.cbServices.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.cbServices.FormattingEnabled = true;
-            this.cbServices.IntegralHeight = false;
-            this.cbServices.ItemHeight = 43;
-            this.cbServices.Location = new System.Drawing.Point(407, 244);
-            this.cbServices.MaxDropDownItems = 4;
-            this.cbServices.MouseState = MaterialSkin.MouseState.OUT;
-            this.cbServices.Name = "cbServices";
-            this.cbServices.Size = new System.Drawing.Size(198, 49);
-            this.cbServices.StartIndex = 0;
-            this.cbServices.TabIndex = 13;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -748,5 +799,7 @@
         private MaterialSkin.Controls.MaterialTextBox txtPorto;
         private MaterialSkin.Controls.MaterialComboBox cbProtocolo;
         private MaterialSkin.Controls.MaterialComboBox cbServices;
+        private MaterialSkin.Controls.MaterialComboBox cbNodesOption;
+        private MaterialSkin.Controls.MaterialComboBox cbOptionPod;
     }
 }

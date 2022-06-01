@@ -28,41 +28,7 @@ namespace Kubernets
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-
-
-
-
-            //private void CreateListView()
-            //{
-            //    listViewNamespaces.Clear();
-            //    //criar colunas para as instancias
-            //    listViewNamespaces.View = View.Details; //para mostrar os cabeçalhos
-            //    listViewNamespaces.Columns.Add("Nome");
-            //    listViewNamespaces.Columns.Add("uid");
-            //    listViewNamespaces.Columns.Add("Data de Criação");
-            //    listViewNamespaces.Columns.Add("Estado");
-
-
-            //    foreach(var Np in Namespace.Items)
-            //    {
-            //        listViewNamespaces.View = View.Details;
-
-            //        ListViewItem item1 = new ListViewItem(Np.metadata.name);
-
-            //        item1.SubItems.Add(Np.metadata.uid);       
-            //        item1.SubItems.Add(Np.metadata.creationTimestamp);
-            //        item1.SubItems.Add(Np.status.phase);
-
-            //        listViewNamespaces.Items.Add(item1);
-
-            //        listViewNamespaces.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-            //        listViewNamespaces.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
-
-            //    }
-
-
-            //}
+            
 
         }
 
@@ -326,7 +292,7 @@ namespace Kubernets
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             //listView1.Columns.Add("Data Criaçao:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Estado:", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Containers:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Nº de Containers:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Pod IP:", -2, HorizontalAlignment.Left);
 
             foreach (var pod in pods.Items)
@@ -336,7 +302,7 @@ namespace Kubernets
                 item2Add.SubItems.Add(pod.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(pod.Status.Phase);
                 item2Add.SubItems.Add(pod.Spec.Containers.Count.ToString());
-                //item2Add.SubItems.Add(pod.Metadata.CreationTimestamp.ToString());
+                //item2Add.SubItems.Add(pod.Spec.Containers);
                 item2Add.SubItems.Add(pod.Status.PodIP);
                 //item2Add.SubItems.Add(pod.Metadata.Uid.ToString());
 
@@ -394,6 +360,8 @@ namespace Kubernets
                 item2Add.SubItems.Add(converterdeploy(deploy.Spec.Replicas.ToString(), deploy.Status.AvailableReplicas.ToString()));
                 item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
                 item2Add.SubItems.Add(deploy.Status.AvailableReplicas.ToString());
+              
+                
 
                 listView1.Items.Add(item2Add);
 
@@ -471,17 +439,52 @@ namespace Kubernets
             switch (cbOption.SelectedIndex)
             {
                 case 0:
+                    if (radioEliminar.Checked)
+                    {
+                        txtNome.Enabled = false;
+                        cbOptionNamespace.Enabled = true;
+                        cbNodesOption.Enabled = false;
+                        txtPorto.Enabled = false;
+                        cbServices.Enabled = false;
+                        cbProtocolo.Enabled = false;
+                        cbOptionPod.Enabled = true;
+                        getCbOptionNamespace();
+                        getCbOtionPod();
+                    }
+                    else
+                    {
+                        txtNome.Enabled = true;
+                        cbOptionNamespace.Enabled = true;
+                        cbNodesOption.Enabled = true;
+                        txtPorto.Enabled = false;
+                        cbServices.Enabled = false;
+                        cbProtocolo.Enabled = false;
+                        getCbOptionNamespace();
+                        getCbNodeOption();
+                    }
                     break;
 
                 case 1:
                     if (radioEliminar.Checked)
                     {
-                        cbOptionNamespace.Enabled = false;
+                        cbOptionNamespace.Enabled = true;
                         getCbOptionNamespace();
+
+                        txtNome.Enabled = false;
+                        cbNodesOption.Enabled = false;
+                        txtPorto.Enabled = false;
+                        cbServices.Enabled = false;
+                        cbProtocolo.Enabled = false;
                     }
                     else
                     {
                         txtNome.Enabled = true;
+                    
+                        cbOptionNamespace.Enabled = false;
+                        cbNodesOption.Enabled = false;
+                        txtPorto.Enabled = false;
+                        cbServices.Enabled = false;
+                        cbProtocolo.Enabled = false;
                     }
                     break;
                 case 3:
@@ -490,7 +493,11 @@ namespace Kubernets
                         cbServices.Enabled = true;
                         cbOptionNamespace.Enabled = true;
                         getCbOptionNamespace();
-                        
+
+                        txtNome.Enabled = false;                        
+                        cbNodesOption.Enabled = false;
+                        txtPorto.Enabled = false;                        
+                        cbProtocolo.Enabled = false;
 
                     }
                     else
@@ -500,6 +507,11 @@ namespace Kubernets
                         cbProtocolo.Enabled = true;
                         cbOptionNamespace.Enabled = true;
                         getCbOptionNamespace();
+
+                                             
+                        cbNodesOption.Enabled = false;                        
+                        cbServices.Enabled = false;
+                        
                     }
                     break;
             }
@@ -508,8 +520,65 @@ namespace Kubernets
 
         }
 
+        private void getCbOtionPod()
+        {
+            cbOptionPod.Items.Clear();
+
+            V1PodList pods = new V1PodList();
+            try
+            {
+                pods = cliente.ListNamespacedPod(cbOptionNamespace.Text);    //todos os namespaces;
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
+
+            foreach (V1Pod pod in pods.Items)
+            {
+                cbOptionPod.Items.Add(pod.Metadata.Name);
+            }
+            if (cbOptionPod.Items.Count != 0)
+            {
+                cbOptionPod.SelectedIndex = 0;
+            }
+            
+
+
+        }
+
+        private void getCbNodeOption()
+        {
+            cbNodesOption.Items.Clear();
+            
+            V1NodeList nodes = new V1NodeList();
+            try
+            {
+                nodes = cliente.ListNode();
+            }
+            catch (NullReferenceException e)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", e.Message.ToString());
+                return;
+            }
+
+            foreach(var node in nodes.Items)
+            {
+                cbNodesOption.Items.Add(node.Metadata.Name);
+            }
+
+            if (cbNodesOption.Items.Count != 0)
+            {
+                cbNodesOption.SelectedIndex = 0;
+            }
+            
+        }
+
         private void getCbServices()
         {
+            cbServices.Items.Clear();
+
             V1ServiceList services = new V1ServiceList();
             try
             {
@@ -527,13 +596,20 @@ namespace Kubernets
                 cbServices.Items.Add(service.Metadata.Name);
 
             }
-            cbServices.SelectedIndex = 0;
+            if (cbServices.Items.Count != 0)
+            {
+                cbServices.SelectedIndex = 0;
+            }
+            
 
 
         }
 
         private void getCbOptionNamespace()
         {
+
+            cbOptionNamespace.Items.Clear();
+
             V1NamespaceList namespaces = new V1NamespaceList();
             try
             {
@@ -551,8 +627,12 @@ namespace Kubernets
                 cbOptionNamespace.Items.Add(namespace1.Metadata.Name);
 
             }
-            cbOptionNamespace.SelectedIndex = 0;
-            getCbServices();
+            if(cbOptionNamespace.Items.Count != 0)
+            {
+                cbOptionNamespace.SelectedIndex = 0;
+                getCbServices();
+            }
+            
         }
 
         private void createNamespace()
@@ -568,8 +648,16 @@ namespace Kubernets
 
             var ns = new V1Namespace { Metadata = new V1ObjectMeta { Labels = new Dictionary<string, string>() { { "app", nome } }, Name = nome } };
 
-            var result = cliente.CreateNamespace(ns);
-            MessageBox.Show(result.ToString());
+            try
+            {
+                cliente.CreateNamespace(ns);
+            }catch (NullReferenceException ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                return;
+            }
+            
+            
 
         }
 
@@ -577,6 +665,9 @@ namespace Kubernets
         {
             switch (cbOption.SelectedIndex)
             {
+                case 0:
+                    createPod();
+                    break;
                 case 1:
                     createNamespace();
                     break;
@@ -587,6 +678,25 @@ namespace Kubernets
                     break;
             }
             
+        }
+
+        private void createPod()
+        {
+            string nome = txtNome.Text;
+            string imagemse = "nginx";
+            string node = cbNodesOption.Text;
+
+            var pod = new V1Pod { Metadata = new V1ObjectMeta { Labels = new Dictionary<string, string>() { { "app", nome } }, Name = nome }, Spec = new V1PodSpec { Containers = new List<V1Container>() { new V1Container { Name = nome, Image = imagemse } }, NodeName = node, HostNetwork = true } };
+
+            try
+            {
+                cliente.CreateNamespacedPod(pod, cbOptionNamespace.Text);
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                return;
+            }
+            MessageBox.Show("Pod " + nome + " criado com sucesso no node:" + node);
         }
 
         private void createService()
@@ -615,9 +725,11 @@ namespace Kubernets
             }catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+                return;
             }
 
-            MessageBox.Show("Service criado com sucesso.");
+            MessageBox.Show("Serviço "+ nome +" no porto "+porto+" com o protocolo "+protocol+" criado com sucesso.");
+
         }
 
         private void delete_namespace()
@@ -632,6 +744,7 @@ namespace Kubernets
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message.ToString());
+                return;
             }
 
             MessageBox.Show("Namespace " + nome + " eliminado.");
@@ -645,6 +758,9 @@ namespace Kubernets
 
             switch (cbOption.SelectedIndex)
             {
+                case 0:
+                    delete_pode();
+                    break;
                 case 1:
                     delete_namespace();
                     break;
@@ -656,6 +772,22 @@ namespace Kubernets
             
         }
 
+        private void delete_pode()
+        {
+            string nome = cbOptionPod.Text;
+            try
+            {
+                cliente.DeleteNamespacedPodAsync(nome, cbOptionNamespace.Text, new V1DeleteOptions());
+                
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+                return;
+            }
+            MessageBox.Show("Pod " + nome + " eliminado");
+        }
+
         private void delete_service()
         {
             string nome = cbServices.Text;
@@ -665,11 +797,14 @@ namespace Kubernets
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message.ToString());
+                return;
             }
-            
-            
+            MessageBox.Show("Serviço " + nome + " eliminado com sucesso.");
+        }
 
-
+        private void cbOptionNamespace_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            getCbOtionPod();
         }
     }
 }
