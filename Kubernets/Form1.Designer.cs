@@ -277,10 +277,10 @@
             this.radioBtn_PodsNamespace.MouseState = MaterialSkin.MouseState.HOVER;
             this.radioBtn_PodsNamespace.Name = "radioBtn_PodsNamespace";
             this.radioBtn_PodsNamespace.Ripple = true;
-            this.radioBtn_PodsNamespace.Size = new System.Drawing.Size(230, 37);
+            this.radioBtn_PodsNamespace.Size = new System.Drawing.Size(190, 37);
             this.radioBtn_PodsNamespace.TabIndex = 6;
             this.radioBtn_PodsNamespace.TabStop = true;
-            this.radioBtn_PodsNamespace.Text = "Listar Pods por Namespace";
+            this.radioBtn_PodsNamespace.Text = "Listar por Namespace";
             this.radioBtn_PodsNamespace.UseVisualStyleBackColor = true;
             this.radioBtn_PodsNamespace.CheckedChanged += new System.EventHandler(this.radioBtn_PodsNamespace_CheckedChanged);
             // 
@@ -295,10 +295,10 @@
             this.radioBtn_AllPods.MouseState = MaterialSkin.MouseState.HOVER;
             this.radioBtn_AllPods.Name = "radioBtn_AllPods";
             this.radioBtn_AllPods.Ripple = true;
-            this.radioBtn_AllPods.Size = new System.Drawing.Size(180, 37);
+            this.radioBtn_AllPods.Size = new System.Drawing.Size(111, 37);
             this.radioBtn_AllPods.TabIndex = 5;
             this.radioBtn_AllPods.TabStop = true;
-            this.radioBtn_AllPods.Text = "Listar todos os Pods";
+            this.radioBtn_AllPods.Text = "Listar tudo";
             this.radioBtn_AllPods.UseVisualStyleBackColor = true;
             this.radioBtn_AllPods.CheckedChanged += new System.EventHandler(this.radioBtn_AllPods_CheckedChanged);
             // 

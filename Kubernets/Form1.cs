@@ -188,11 +188,20 @@ namespace Kubernets
 
         private void btn_pods_Click(object sender, EventArgs e)
         {
-            get_pods();
+            if (radioBtn_AllPods.Checked)
+            {
+                get_pods();
+            }
+            else
+            {
+                getPodsNamespace(cb_namespaces.Text);
+            }
+            
         }
 
         private void get_pods()
         {
+
             V1PodList pods = new V1PodList();
             try
             {
@@ -256,6 +265,8 @@ namespace Kubernets
                 return;
             }
 
+            
+
             foreach (var namespace1 in namespaces.Items)
             {
 
@@ -267,7 +278,7 @@ namespace Kubernets
 
         private void radioBtn_PodsNamespace_CheckedChanged(object sender, EventArgs e)
         {
-            btn_pods.Enabled = false;
+            //btn_pods.Enabled = false;
             cb_namespaces.Enabled = true;
             fillCbNamespaces();
 
@@ -320,25 +331,40 @@ namespace Kubernets
 
         private void radioBtn_AllPods_CheckedChanged(object sender, EventArgs e)
         {
-            btn_pods.Enabled = true;
+            //btn_pods.Enabled = true;
             cb_namespaces.Enabled = false;
 
         }
 
         private void cb_namespaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            getPodsNamespace(cb_namespaces.SelectedItem.ToString());
+            //getPodsNamespace(cb_namespaces.Text);
         }
 
         private void btnDeployments_Click(object sender, EventArgs e)
+        {
+            if (radioBtn_AllPods.Checked)
+            {
+                getDeployments();
+            }
+            else
+            {
+                getDeploymentsNamespace(cb_namespaces.Text);
+            }
+            
+           
+        }
+
+        private void getDeploymentsNamespace(string nameSpace)
         {
             V1DeploymentList deployments = new V1DeploymentList();
 
             try
             {
-                deployments = cliente.ListDeploymentForAllNamespaces();   //deployments de todos os namespaces
+                deployments = cliente.ListNamespacedDeployment(nameSpace);
+                
             }
-            catch(NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
                 return;
@@ -353,7 +379,7 @@ namespace Kubernets
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
-           
+
 
             foreach (var deploy in deployments.Items)
             {
@@ -361,7 +387,7 @@ namespace Kubernets
                 ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name);
                 item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(deploy.Status.Replicas.ToString());
-                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());            
+                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
 
                 listView1.Items.Add(item2Add);
 
@@ -370,6 +396,48 @@ namespace Kubernets
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
+
+        private void getDeployments()
+        {
+            V1DeploymentList deployments = new V1DeploymentList();
+
+            try
+            {
+                deployments = cliente.ListDeploymentForAllNamespaces();   //deployments de todos os namespaces
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            lbl_ListView.Text = "Deployments";
+
+            listView1.Clear();
+
+            listView1.View = View.Details;
+            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
+
+
+            foreach (var deploy in deployments.Items)
+            {
+
+                ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name);
+                item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
+                item2Add.SubItems.Add(deploy.Status.Replicas.ToString());
+                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
+
+                listView1.Items.Add(item2Add);
+
+            }
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         public string converterdeploy(string v1, string v2)
         {
 
@@ -380,6 +448,60 @@ namespace Kubernets
         private void btn_services_Click(object sender, EventArgs e)
         {
 
+            if (radioBtn_AllPods.Checked)
+            {
+                getAllServices();
+            }
+            else
+            {
+                getServicesNamespace(cb_namespaces.Text);
+            }
+
+            
+        }
+
+        private void getServicesNamespace(string nameSpaces)
+        {
+            V1ServiceList services = new V1ServiceList();
+            try
+            {
+                services = cliente.ListNamespacedService(nameSpaces);
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            lbl_ListView.Text = "Services";
+
+            listView1.Clear();
+
+            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Tipo:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Cluster-IP:", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Portos/Protocolos:", -2, HorizontalAlignment.Left);
+
+            foreach (var service in services.Items)
+            {
+
+                ListViewItem item2Add = new ListViewItem(service.Metadata.Name.ToString());
+                item2Add.SubItems.Add(service.Metadata.Namespace().ToString());
+                item2Add.SubItems.Add(service.Spec.Type.ToString());
+                item2Add.SubItems.Add(service.Spec.ClusterIP.ToString());
+                item2Add.SubItems.Add(converterdeploy(service.Spec.Ports[0].Port.ToString(), service.Spec.Ports[0].Protocol));
+
+                listView1.Items.Add(item2Add);
+
+            }
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);  // autosize colunas
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void getAllServices()
+        {
             V1ServiceList services = new V1ServiceList();
             try
             {
@@ -395,7 +517,7 @@ namespace Kubernets
 
             listView1.Clear();
 
-            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);            
+            listView1.Columns.Add("Nome:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Tipo:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Cluster-IP:", -2, HorizontalAlignment.Left);
@@ -408,7 +530,7 @@ namespace Kubernets
                 item2Add.SubItems.Add(service.Metadata.Namespace().ToString());
                 item2Add.SubItems.Add(service.Spec.Type.ToString());
                 item2Add.SubItems.Add(service.Spec.ClusterIP.ToString());
-                item2Add.SubItems.Add(converterdeploy(service.Spec.Ports[0].Port.ToString(),service.Spec.Ports[0].Protocol));
+                item2Add.SubItems.Add(converterdeploy(service.Spec.Ports[0].Port.ToString(), service.Spec.Ports[0].Protocol));
 
                 listView1.Items.Add(item2Add);
 
@@ -539,7 +661,7 @@ namespace Kubernets
                         cbOptionPod.Enabled = false;
 
                         txtNumeroReplicas.Enabled = false;
-                        getCbServices();
+                        getServices();
 
                     }
                     else
@@ -715,7 +837,7 @@ namespace Kubernets
             
         }
 
-        private void getCbServices()
+        private void getServices()
         {
             cbServices.Items.Clear();
 
@@ -771,7 +893,7 @@ namespace Kubernets
             if(cbOptionNamespace.Items.Count != 0)
             {
                 cbOptionNamespace.SelectedIndex = 0;
-                getCbServices();
+                getServices();
                 getCbDeployments();
                 getCbOtionPod();
             }
@@ -968,7 +1090,7 @@ namespace Kubernets
         private void cbOptionNamespace_SelectedIndexChanged(object sender, EventArgs e)
         {
             getCbOtionPod();
-            getCbServices();
+            getServices();
             getCbDeployments();
         }
     }
