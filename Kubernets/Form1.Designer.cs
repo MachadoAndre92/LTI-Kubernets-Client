@@ -49,6 +49,14 @@
             this.listView1 = new MaterialSkin.Controls.MaterialListView();
             this.bnt_Nodes = new MaterialSkin.Controls.MaterialButton();
             this.TabCreate = new System.Windows.Forms.TabPage();
+            this.materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
+            this.cbDeployments = new MaterialSkin.Controls.MaterialComboBox();
+            this.txtNumeroReplicas = new MaterialSkin.Controls.MaterialTextBox();
+            this.materialLabel8 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
+            this.materialLabel4 = new MaterialSkin.Controls.MaterialLabel();
             this.cbOptionPod = new MaterialSkin.Controls.MaterialComboBox();
             this.cbNodesOption = new MaterialSkin.Controls.MaterialComboBox();
             this.cbServices = new MaterialSkin.Controls.MaterialComboBox();
@@ -133,7 +141,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(269, 28);
+            this.pictureBox3.Location = new System.Drawing.Point(276, 28);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(206, 103);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -143,7 +151,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(500, 55);
+            this.pictureBox2.Location = new System.Drawing.Point(488, 54);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(238, 63);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -153,9 +161,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(6, 48);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 41);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(238, 70);
+            this.pictureBox1.Size = new System.Drawing.Size(257, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -387,6 +395,14 @@
             // 
             // TabCreate
             // 
+            this.TabCreate.Controls.Add(this.materialLabel9);
+            this.TabCreate.Controls.Add(this.cbDeployments);
+            this.TabCreate.Controls.Add(this.txtNumeroReplicas);
+            this.TabCreate.Controls.Add(this.materialLabel8);
+            this.TabCreate.Controls.Add(this.materialLabel7);
+            this.TabCreate.Controls.Add(this.materialLabel6);
+            this.TabCreate.Controls.Add(this.materialLabel5);
+            this.TabCreate.Controls.Add(this.materialLabel4);
             this.TabCreate.Controls.Add(this.cbOptionPod);
             this.TabCreate.Controls.Add(this.cbNodesOption);
             this.TabCreate.Controls.Add(this.cbServices);
@@ -409,6 +425,120 @@
             this.TabCreate.Text = "Criar";
             this.TabCreate.UseVisualStyleBackColor = true;
             // 
+            // materialLabel9
+            // 
+            this.materialLabel9.AutoSize = true;
+            this.materialLabel9.Depth = 0;
+            this.materialLabel9.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel9.Location = new System.Drawing.Point(578, 251);
+            this.materialLabel9.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel9.Name = "materialLabel9";
+            this.materialLabel9.Size = new System.Drawing.Size(94, 19);
+            this.materialLabel9.TabIndex = 23;
+            this.materialLabel9.Text = "Deployments";
+            // 
+            // cbDeployments
+            // 
+            this.cbDeployments.AutoResize = false;
+            this.cbDeployments.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cbDeployments.Depth = 0;
+            this.cbDeployments.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.cbDeployments.DropDownHeight = 174;
+            this.cbDeployments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDeployments.DropDownWidth = 121;
+            this.cbDeployments.Enabled = false;
+            this.cbDeployments.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.cbDeployments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cbDeployments.FormattingEnabled = true;
+            this.cbDeployments.IntegralHeight = false;
+            this.cbDeployments.ItemHeight = 43;
+            this.cbDeployments.Location = new System.Drawing.Point(578, 273);
+            this.cbDeployments.MaxDropDownItems = 4;
+            this.cbDeployments.MouseState = MaterialSkin.MouseState.OUT;
+            this.cbDeployments.Name = "cbDeployments";
+            this.cbDeployments.Size = new System.Drawing.Size(196, 49);
+            this.cbDeployments.StartIndex = 0;
+            this.cbDeployments.TabIndex = 22;
+            // 
+            // txtNumeroReplicas
+            // 
+            this.txtNumeroReplicas.AnimateReadOnly = false;
+            this.txtNumeroReplicas.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtNumeroReplicas.Depth = 0;
+            this.txtNumeroReplicas.Enabled = false;
+            this.txtNumeroReplicas.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtNumeroReplicas.Hint = "Nº de Replicas";
+            this.txtNumeroReplicas.LeadingIcon = null;
+            this.txtNumeroReplicas.Location = new System.Drawing.Point(730, 14);
+            this.txtNumeroReplicas.MaxLength = 50;
+            this.txtNumeroReplicas.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtNumeroReplicas.Multiline = false;
+            this.txtNumeroReplicas.Name = "txtNumeroReplicas";
+            this.txtNumeroReplicas.Size = new System.Drawing.Size(100, 50);
+            this.txtNumeroReplicas.TabIndex = 21;
+            this.txtNumeroReplicas.Text = "";
+            this.txtNumeroReplicas.TrailingIcon = null;
+            // 
+            // materialLabel8
+            // 
+            this.materialLabel8.AutoSize = true;
+            this.materialLabel8.Depth = 0;
+            this.materialLabel8.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel8.Location = new System.Drawing.Point(578, 166);
+            this.materialLabel8.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel8.Name = "materialLabel8";
+            this.materialLabel8.Size = new System.Drawing.Size(46, 19);
+            this.materialLabel8.TabIndex = 20;
+            this.materialLabel8.Text = "Nodes";
+            // 
+            // materialLabel7
+            // 
+            this.materialLabel7.AutoSize = true;
+            this.materialLabel7.Depth = 0;
+            this.materialLabel7.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel7.Location = new System.Drawing.Point(578, 85);
+            this.materialLabel7.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel7.Name = "materialLabel7";
+            this.materialLabel7.Size = new System.Drawing.Size(69, 19);
+            this.materialLabel7.TabIndex = 19;
+            this.materialLabel7.Text = "Protocolo";
+            // 
+            // materialLabel6
+            // 
+            this.materialLabel6.AutoSize = true;
+            this.materialLabel6.Depth = 0;
+            this.materialLabel6.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel6.Location = new System.Drawing.Point(322, 251);
+            this.materialLabel6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel6.Name = "materialLabel6";
+            this.materialLabel6.Size = new System.Drawing.Size(37, 19);
+            this.materialLabel6.TabIndex = 18;
+            this.materialLabel6.Text = "Pods";
+            // 
+            // materialLabel5
+            // 
+            this.materialLabel5.AutoSize = true;
+            this.materialLabel5.Depth = 0;
+            this.materialLabel5.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel5.Location = new System.Drawing.Point(322, 166);
+            this.materialLabel5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel5.Name = "materialLabel5";
+            this.materialLabel5.Size = new System.Drawing.Size(60, 19);
+            this.materialLabel5.TabIndex = 17;
+            this.materialLabel5.Text = "Services";
+            // 
+            // materialLabel4
+            // 
+            this.materialLabel4.AutoSize = true;
+            this.materialLabel4.Depth = 0;
+            this.materialLabel4.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel4.Location = new System.Drawing.Point(322, 85);
+            this.materialLabel4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel4.Name = "materialLabel4";
+            this.materialLabel4.Size = new System.Drawing.Size(93, 19);
+            this.materialLabel4.TabIndex = 16;
+            this.materialLabel4.Text = "Namespaces";
+            // 
             // cbOptionPod
             // 
             this.cbOptionPod.AutoResize = false;
@@ -424,7 +554,7 @@
             this.cbOptionPod.FormattingEnabled = true;
             this.cbOptionPod.IntegralHeight = false;
             this.cbOptionPod.ItemHeight = 43;
-            this.cbOptionPod.Location = new System.Drawing.Point(322, 189);
+            this.cbOptionPod.Location = new System.Drawing.Point(322, 273);
             this.cbOptionPod.MaxDropDownItems = 4;
             this.cbOptionPod.MouseState = MaterialSkin.MouseState.OUT;
             this.cbOptionPod.Name = "cbOptionPod";
@@ -447,7 +577,7 @@
             this.cbNodesOption.FormattingEnabled = true;
             this.cbNodesOption.IntegralHeight = false;
             this.cbNodesOption.ItemHeight = 43;
-            this.cbNodesOption.Location = new System.Drawing.Point(578, 133);
+            this.cbNodesOption.Location = new System.Drawing.Point(578, 188);
             this.cbNodesOption.MaxDropDownItems = 4;
             this.cbNodesOption.MouseState = MaterialSkin.MouseState.OUT;
             this.cbNodesOption.Name = "cbNodesOption";
@@ -470,7 +600,7 @@
             this.cbServices.FormattingEnabled = true;
             this.cbServices.IntegralHeight = false;
             this.cbServices.ItemHeight = 43;
-            this.cbServices.Location = new System.Drawing.Point(322, 132);
+            this.cbServices.Location = new System.Drawing.Point(322, 188);
             this.cbServices.MaxDropDownItems = 4;
             this.cbServices.MouseState = MaterialSkin.MouseState.OUT;
             this.cbServices.Name = "cbServices";
@@ -496,7 +626,7 @@
             this.cbProtocolo.Items.AddRange(new object[] {
             "TCP",
             "UDP"});
-            this.cbProtocolo.Location = new System.Drawing.Point(578, 70);
+            this.cbProtocolo.Location = new System.Drawing.Point(578, 107);
             this.cbProtocolo.MaxDropDownItems = 4;
             this.cbProtocolo.MouseState = MaterialSkin.MouseState.OUT;
             this.cbProtocolo.Name = "cbProtocolo";
@@ -538,7 +668,7 @@
             this.cbOptionNamespace.FormattingEnabled = true;
             this.cbOptionNamespace.IntegralHeight = false;
             this.cbOptionNamespace.ItemHeight = 43;
-            this.cbOptionNamespace.Location = new System.Drawing.Point(322, 70);
+            this.cbOptionNamespace.Location = new System.Drawing.Point(322, 107);
             this.cbOptionNamespace.MaxDropDownItems = 4;
             this.cbOptionNamespace.MouseState = MaterialSkin.MouseState.OUT;
             this.cbOptionNamespace.Name = "cbOptionNamespace";
@@ -801,5 +931,13 @@
         private MaterialSkin.Controls.MaterialComboBox cbServices;
         private MaterialSkin.Controls.MaterialComboBox cbNodesOption;
         private MaterialSkin.Controls.MaterialComboBox cbOptionPod;
+        private MaterialSkin.Controls.MaterialLabel materialLabel8;
+        private MaterialSkin.Controls.MaterialLabel materialLabel7;
+        private MaterialSkin.Controls.MaterialLabel materialLabel6;
+        private MaterialSkin.Controls.MaterialLabel materialLabel5;
+        private MaterialSkin.Controls.MaterialLabel materialLabel4;
+        private MaterialSkin.Controls.MaterialTextBox txtNumeroReplicas;
+        private MaterialSkin.Controls.MaterialLabel materialLabel9;
+        private MaterialSkin.Controls.MaterialComboBox cbDeployments;
     }
 }

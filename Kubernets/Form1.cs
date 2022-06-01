@@ -350,18 +350,15 @@ namespace Kubernets
             listView1.Columns.Add("Namespace:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Nº replicas:", -2, HorizontalAlignment.Left);
             listView1.Columns.Add("Actualizado:", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Disponivel:", -2, HorizontalAlignment.Left);
+           
 
             foreach (var deploy in deployments.Items)
             {
 
-                ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name.ToString());
+                ListViewItem item2Add = new ListViewItem(deploy.Metadata.Name);
                 item2Add.SubItems.Add(deploy.Metadata.Namespace().ToString());
-                item2Add.SubItems.Add(converterdeploy(deploy.Spec.Replicas.ToString(), deploy.Status.AvailableReplicas.ToString()));
-                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());
-                item2Add.SubItems.Add(deploy.Status.AvailableReplicas.ToString());
-              
-                
+                item2Add.SubItems.Add(deploy.Status.Replicas.ToString());
+                item2Add.SubItems.Add(deploy.Status.UpdatedReplicas.ToString());            
 
                 listView1.Items.Add(item2Add);
 
@@ -420,8 +417,13 @@ namespace Kubernets
 
         private void radioCriar_CheckedChanged(object sender, EventArgs e)
         {
+
             btnCriar.Enabled = radioCriar.Checked;
             btnEliminar.Enabled = radioEliminar.Checked;
+
+            
+
+           
         }
 
         private void radioEliminar_CheckedChanged(object sender, EventArgs e)
@@ -438,6 +440,7 @@ namespace Kubernets
 
             switch (cbOption.SelectedIndex)
             {
+                //Opção de PODS
                 case 0:
                     if (radioEliminar.Checked)
                     {
@@ -459,11 +462,13 @@ namespace Kubernets
                         txtPorto.Enabled = false;
                         cbServices.Enabled = false;
                         cbProtocolo.Enabled = false;
+                        cbOptionPod.Enabled = false;
                         getCbOptionNamespace();
                         getCbNodeOption();
                     }
                     break;
 
+                //Opção NAMESPACE
                 case 1:
                     if (radioEliminar.Checked)
                     {
@@ -487,6 +492,26 @@ namespace Kubernets
                         cbProtocolo.Enabled = false;
                     }
                     break;
+                //Deployments
+                case 2:
+                    if (radioEliminar.Checked)
+                    {
+                        cbDeployments.Enabled = true;
+                        cbOptionNamespace.Enabled = true;
+                        getCbOptionNamespace();
+                        getCbDeployments();
+                    }
+                    else
+                    {
+                        txtNome.Enabled = true;
+                        txtPorto.Enabled = true;
+                        txtNumeroReplicas.Enabled = true;
+                        cbOptionNamespace.Enabled = true;
+                        getCbOptionNamespace();
+                        
+                    }
+                    break;
+                //Opção SERVICES
                 case 3:
                     if (radioEliminar.Checked)
                     {
@@ -498,6 +523,7 @@ namespace Kubernets
                         cbNodesOption.Enabled = false;
                         txtPorto.Enabled = false;                        
                         cbProtocolo.Enabled = false;
+                        getCbServices();
 
                     }
                     else
@@ -512,12 +538,108 @@ namespace Kubernets
                         cbNodesOption.Enabled = false;                        
                         cbServices.Enabled = false;
                         
+                        
                     }
                     break;
             }
 
 
 
+        }
+
+        private void getCbDeployments()
+        {
+            cbDeployments.Items.Clear();
+
+            V1DeploymentList deployments = new V1DeploymentList();
+
+            try
+            {
+                deployments = cliente.ListNamespacedDeployment(cbOptionNamespace.Text);
+                
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Ficheiro de configuração errado ou em falta", ex.Message.ToString());
+                return;
+            }
+
+            foreach(var deployment in deployments.Items)
+            {
+                cbDeployments.Items.Add(deployment.Metadata.Name);
+            }
+        }
+
+        private void createDeployment()
+        {
+            string nome = txtNome.Text;
+            int porto = Convert.ToInt32(txtPorto.Text);
+            int replicas = Convert.ToInt32(txtNumeroReplicas.Text);
+            string img = "nginx";
+
+            V1Deployment deployment = new V1Deployment()
+            {
+                ApiVersion = "apps/v1",
+                Kind = "Deployment",
+                Metadata = new V1ObjectMeta()
+                {
+                    Name = nome,
+                    NamespaceProperty = null,
+                    Labels = new Dictionary<string, string>()
+                    {
+                        { "app", nome }
+                    }
+                },
+                Spec = new V1DeploymentSpec
+                {
+                    Replicas = replicas,
+                    Selector = new V1LabelSelector()
+                    {
+                        MatchLabels = new Dictionary<string, string>
+                        {
+                            { "app", nome }
+                        }
+                    },
+                    Template = new V1PodTemplateSpec()
+                    {
+                        Metadata = new V1ObjectMeta()
+                        {
+                            CreationTimestamp = null,
+                            Labels = new Dictionary<string, string>
+                            {
+                                { "app", nome }
+                            }
+                        },
+                        Spec = new V1PodSpec
+                        {
+                            Containers = new List<V1Container>()
+                            {
+                                new V1Container()
+                                {
+                                    Name = nome ,
+                                    Image = img,
+                                    ImagePullPolicy = "Always",
+                                    Ports = new List<V1ContainerPort> { new V1ContainerPort(porto) }
+                                }
+                            }
+                        }
+                    }
+                },
+                Status = new V1DeploymentStatus()
+                {
+                    Replicas = replicas
+                }
+            };
+            try
+            {
+                cliente.CreateNamespacedDeployment(deployment, cbOptionNamespace.Text);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+                return;
+            }
+            
         }
 
         private void getCbOtionPod()
@@ -582,6 +704,7 @@ namespace Kubernets
             V1ServiceList services = new V1ServiceList();
             try
             {
+                
                 services = cliente.ListNamespacedService(cbOptionNamespace.Text);
             }
             catch (NullReferenceException ex)
@@ -631,6 +754,8 @@ namespace Kubernets
             {
                 cbOptionNamespace.SelectedIndex = 0;
                 getCbServices();
+                getCbDeployments();
+                getCbOtionPod();
             }
             
         }
@@ -671,7 +796,9 @@ namespace Kubernets
                 case 1:
                     createNamespace();
                     break;
-
+                case 2:
+                    createDeployment();
+                    break;
                 case 3:
                     createService();
                     
@@ -764,11 +891,29 @@ namespace Kubernets
                 case 1:
                     delete_namespace();
                     break;
+                case 2:
+                    delete_deployment();
+                    break;
                 case 3:
                     delete_service();
                     break;
             }
 
+            
+        }
+
+        private void delete_deployment()
+        {
+            string nome = cbDeployments.Text;
+
+            try
+            {
+                cliente.DeleteNamespacedServiceAsync(nome, cbOptionNamespace.Text, new V1DeleteOptions());
+            }catch(Exception e)
+            {
+                MessageBox.Show(e.Message.ToString());
+                return;
+            }
             
         }
 
@@ -805,6 +950,8 @@ namespace Kubernets
         private void cbOptionNamespace_SelectedIndexChanged(object sender, EventArgs e)
         {
             getCbOtionPod();
+            getCbServices();
+            getCbDeployments();
         }
     }
 }
